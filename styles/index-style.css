@@ -1,3 +1,45 @@
-/***************
-  MAIN STYLES
-***************/
+/***********************
+  GENERIC CSS STARTUP
+***********************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+
+/***********************
+        HEADINGS
+***********************/
+
+h1 {
+  font-size: 3.0rem;
+  text-align: center;
+  color: green;
+  margin-bottom: 3.0rem;
+}
+
+/***********************
+  FOOTBALL PITCH TILES
+***********************/
+
+.football-pitch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 250px;
+  margin: auto;
+}
+
+.football-pitch__para {
+  margin-bottom: 2.0rem;
+}
+
+.football-pitch__tile {
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  background-color: greenyellow;
+  border: 1px solid gray;
+}
