@@ -3,15 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TBC</title>
+    <title>Football Game</title>
     <meta name="description" content="Prototype football turn-based game">
     <link rel="stylesheet" href="styles/index-style.css?ver=0.0.1">
   </head>
   <body>
     <h1>Prototype Football Game</h1>
+    <!--INTRODUCTION INFORMATION-->
+    <section>
+      <p class="intro-section__para">Here is the pitch, in a very basic form as it's just prototyping. Can work your pixel magic on it and spruce it up if so wish :)</p>
+    </section>
     <!--FOOTBALL PITCH TILES-->
     <section class="football-pitch">
-      <p class="football-pitch__para">Here is the pitch, in a very basic form as it's just prototyping. Can work your pixel magic on it and spruce it up if so wish :)</p>
       <!--PITCH LINE 1-->
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
@@ -28,19 +31,19 @@
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
-      <div class="football-pitch__tile"></div>
+      <div class="football-pitch__tile"><div data-player="1" data-position="DC" class="football-pitch__player-1"></div></div>
       <div class="football-pitch__tile"></div>
       <!--PITCH LINE 4-->
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
-      <div class="football-pitch__tile"></div>
+      <div class="football-pitch__tile"><div data-player="1" data-position="AC" class="football-pitch__player-1"></div><div class="football-pitch__ball"></div></div>
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
       <!--PITCH LINE 5-->
       <div class="football-pitch__tile"></div>
+      <div class="football-pitch__tile"><div data-player="2" data-position="DC" class="football-pitch__player-2"></div></div>
       <div class="football-pitch__tile"></div>
-      <div class="football-pitch__tile"></div>
-      <div class="football-pitch__tile"></div>
+      <div class="football-pitch__tile"><div data-player="2" data-position="AC" class="football-pitch__player-2"></div></div>
       <div class="football-pitch__tile"></div>
       <!--PITCH LINE 6-->
       <div class="football-pitch__tile"></div>
@@ -55,6 +58,7 @@
       <div class="football-pitch__tile"></div>
       <div class="football-pitch__tile"></div>
     </section>
+
     <script src="scripts/index-script.js?ver=0.0.1"></script>
   </body>
 </html>

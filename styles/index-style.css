@@ -16,9 +16,19 @@
 h1 {
   font-size: 3.0rem;
   text-align: center;
-  color: green;
+  color: hsl(122, 39%, 41%);
   margin-bottom: 3.0rem;
 }
+
+/***********************
+      INTRO SECTION
+***********************/
+
+.intro-section__para {
+  text-align: center;
+  margin-bottom: 2.0rem;
+}
+
 
 /***********************
   FOOTBALL PITCH TILES
@@ -28,18 +38,56 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 250px;
+  width: 300px;
   margin: auto;
 }
 
-.football-pitch__para {
-  margin-bottom: 2.0rem;
+.football-pitch__tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 60px;
+  width: 60px;
+  height: 60px;
+  background-color: hsl(123, 38%, 63%);
+  border: 1px solid hsl(123, 35%, 51%);
+  transition: all ease 0.2s;
+  cursor: pointer;
 }
 
-.football-pitch__tile {
-  flex: 0 0 50px;
-  width: 50px;
-  height: 50px;
-  background-color: greenyellow;
-  border: 1px solid gray;
+.football-pitch__tile:hover {
+  border: 2px solid yellow;
+}
+
+/***********************
+    PLAYER BUTTONS
+***********************/
+
+.football-pitch__player-1,
+.football-pitch__player-2 {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid navy;
+}
+
+.football-pitch__player-2 {
+  background-color: hsl(360, 67%, 44%);
+  border: 2px solid white;
+}
+
+/***********************
+        FOOTBALL
+***********************/
+
+.football-pitch__ball {
+  position: absolute;
+  flex: 0 0 10px;
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  border-radius: 50%;
+  border: 1px solid black;
 }
