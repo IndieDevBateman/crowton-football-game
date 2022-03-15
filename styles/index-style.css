@@ -39,7 +39,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   width: 300px;
-  margin: auto;
+  margin: 0 auto 2.0rem;
 }
 
 .football-pitch__tile {
@@ -57,6 +57,10 @@ h1 {
 
 .football-pitch__tile:hover {
   border: 2px solid yellow;
+}
+
+.football-pitch__tile--selected {
+  border: 4px dashed hsl(261, 54%, 68%);
 }
 
 /***********************
@@ -90,4 +94,40 @@ h1 {
   background-color: yellow;
   border-radius: 50%;
   border: 1px solid black;
+}
+
+/***********************
+  PLAYER TURN SECTION
+***********************/
+
+.player-turn-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 1000px;
+  margin: auto;
+  margin-bottom: 5.0rem;
+}
+
+.turn-button {
+  flex: 0 0 100%;
+  padding: 10px 20px;
+  background-color: hsl(123, 38%, 63%);
+  border: 1px solid hsl(122, 39%, 41%);
+  text-align: center;
+  margin: auto;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all ease 0.5s;
+}
+
+.turn-button:hover {
+  background-color: hsl(45, 90%, 88%);
+}
+
+.player-turn__box {
+  flex: 0 0 500px;
+  width: 500px;
+  min-height: 500px;
+  border: 1px solid hsl(0, 0%, 81%);
 }
