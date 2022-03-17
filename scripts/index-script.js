@@ -5,7 +5,8 @@ let ballPossessionTeam = 1;
 User state variable to keep track of the current state of the user's actions
 STATES (will add more as necessary)
 Active - looking to select a player
-Selected - player selected and must now choose what to do with that player
+Selected - player selected and must now choose a tile for further options
+Options - awaiting the user to decide what the selected player will do
 Waiting - turn completed and waiting other player's move
 */
 let teamState = [];
@@ -18,12 +19,6 @@ const pitchTiles = document.querySelectorAll(".football-pitch__tile");
 let teamPlayers = [];
 teamPlayers[1] = document.querySelectorAll("[data-player='1']");
 teamPlayers[2] = document.querySelectorAll("[data-player='2']");
-teamPlayers[1].forEach(e => {
-  e.addEventListener("click", playerSelected, false);
-});
-teamPlayers[2].forEach(e => {
-  e.addEventListener("click", playerSelected, false);
-});
 
 // Turn Button code
 const turnButton = document.getElementById("turn-button");
@@ -31,12 +26,16 @@ turnButton.addEventListener("click", switchTurn, false);
 // Function to enable us to switch between who the active player is - for testing
 function switchTurn() {
   // Do not allow the player to switch if they currently have a selected player as they need to complete the move first
-  if (playerTurn == 1 && teamState[1] != "Selected") {
-    turnButton.textContent = "Player 2";
-    playerTurn = 2;
-  } else if (playerTurn == 2 && teamState[2] != "Selected") {
-    turnButton.textContent = "Player 1";
-    playerTurn = 1;
+  if (playerTurn == 1) {
+    if (teamState[1] != "Selected" && teamState[1] != "Options") {
+      turnButton.textContent = "Player 2";
+      playerTurn = 2;
+    }
+  } else if (playerTurn == 2) {
+    if (teamState[2] != "Selected" && teamState[2] != "Options") {
+      turnButton.textContent = "Player 1";
+      playerTurn = 1;
+    }
   }
 }
 
@@ -45,39 +44,79 @@ pitchTiles.forEach(e => {
   e.addEventListener("click", tileSelected, false);
 });
 
-// User Active - if user player selected trigger move
-function playerSelected() {
-  // If active state - has the user selected a player?
-  if (teamState[playerTurn] == "Active") {
-    // User has selected a player - is it of the user's players that has been selected?
-    if (this.dataset.player == playerTurn) {
-      // It is one of the user's players - select them
-      this.parentElement.classList.add("football-pitch__tile--selected");
-      teamState[playerTurn] = "Select";
-    }
-  }
-}
-
-// User has selected a player and then selects a pitch - determine what they wish to do - pass,shoot,mark,tackle
+// User selects a tile - have they selected a player, if so, do they now wish to pass,shoot,mark,tackle
 function tileSelected() {
-  if (teamState[playerTurn] == "Select") {
-    teamState[playerTurn] = "Selected";
-  } else {
-    if (teamState[playerTurn] == "Selected") {
-      // Get the selected player
-      let selectedPlayer = document.querySelector(".football-pitch__tile--selected");
-      // Is the selected player in possession of the ball?
-      if (selectedPlayer.lastChild.classList.contains("football-pitch__ball")) {
-        // User is in possession of the ball - therefore pass or shoot
-        
-      } else {
-        // User is not in possession of the ball - therefore mark or tackle
-        
+  // Check if the selected pitch tile contains a player and that they are in the active state
+  if (this.querySelector("[data-player]") && teamState[playerTurn] == "Active") {
+    // User has selected a player and are active - is it one of the user's players that has been selected?
+    let tilePlayer = this.querySelector("[data-player]");
+    if (tilePlayer.dataset.player == playerTurn) {
+      // It is one of the user's players - select them
+      this.classList.add("football-pitch__tile--selected");
+      teamState[playerTurn] = "Selected";
+    }
+  } else if (teamState[playerTurn] == "Selected") {
+    // User has a player already selected, and now they are choosing a pitch tile. Present option(s) based on whether they are ball possesor, etc.
+    // Get the selected player - i.e. the player who is completing the move as they have been previously selected by the user
+    let selectedPlayerTile = document.querySelector(".football-pitch__tile--selected");
+    // Every player has the option to move if the space is free
+    if (!this.querySelector("[data-player]")) {
+      createButton("move");
+    }
+    // Is the selected player in possession of the ball?
+    if (selectedPlayerTile.querySelector(".football-pitch__ball")) {
+      // User is in possession of the ball - they can shoot in the direction chosen (prbably amend this later if idea progresses!)
+      createButton("shoot");
+      // If the tile contains a teammate, pass option available
+      if (this.querySelector("[data-player='" + playerTurn + "']")) {
+        createButton("pass");
+      }
+    } else if (playerTurn != ballPossessionTeam) {
+      // User is not in possession of the ball - if chossing an opposition player have the option to mark
+      if (this.querySelector("[data-player='" + ballPossessionTeam + "']")) {
+        createButton("mark");
+        // Opposition player in the tile chosen - if they have the ball can also have option of tackle
+        if (this.querySelector(".football-pitch__ball")) {
+          createButton("tackle");
+        }
       }
     }
   }
 }
 
-// User waiting
+// Create move buttons
+function createButton(buttonType) {
+  let button = document.createElement("button");
+  button.classList.add("player-turn__box-button");
+  button.addEventListener("click", moveButtonSelected, false);
+    button.textContent = buttonType;
+  let turnBox;
+  if (playerTurn == 1) {
+    turnBox = document.getElementById("player-1-turn-box");
+  } else {
+    turnBox = document.getElementById("player-2-turn-box");
+  }
+  turnBox.appendChild(button);
+  teamState[playerTurn] = "Options";
+}
+
+// Move button pressed
+function moveButtonSelected() {
+  // Get the selected player to log their move choice
+  let selectedPlayerTile = document.querySelector(".football-pitch__tile--selected");
+  let selectedPlayer = selectedPlayerTile.querySelector("[data-player]");
+  // Log move choice for processing when game move complete
+  if (this.textContent == "pass") {
+    
+  } else if (this.textContent == "shoot") {
+
+  } else if (this.textContent == "mark") {
+    
+  } else if (this.textContent == "tackle") {
+    
+  } else if (this.textContent == "move") {
+    
+  }
+}
 
 // Turn completion
